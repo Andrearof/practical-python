@@ -1,6 +1,6 @@
 # mortgage.py
 #
-# Exercise 1.10
+# Exercise 1.11
 """
 Dave has decided to take out a 30-year fixed rate mortgage of $500,000 with Guido’s Mortgage, Stock Investment, and Bitcoin trading corporation.
 The interest rate is 5% and the monthly payment is $2684.11.
@@ -17,6 +17,9 @@ How much will Dave pay if he pays an extra $1000/month for 4 years starting afte
 
 1.10:
 Modify the program to print out a table showing the month, total paid so far, and the remaining principal.
+
+1.11:
+Fix the program to correct for the overpayment that occurs in the last month.
 """
 
 principal = 500000.0
@@ -40,6 +43,8 @@ while principal > 0:
         monthly_payment = payment + extra_payment
     else:
         monthly_payment = payment
+    if principal * (1 + rate / 12) < monthly_payment:
+        monthly_payment = principal * (1 + rate / 12)
     principal = principal * (1 + rate / 12) - monthly_payment
     total_paid = total_paid + monthly_payment
     months += 1
