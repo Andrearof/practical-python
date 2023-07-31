@@ -58,3 +58,16 @@ Remove the first occurrence of 'YHOO'.
 """
 symlist.remove("YHOO")
 # print(symlist)  # ['HPQ', 'AA', 'AAPL', 'AIG', 'GOOG', 'RHT', 'YHOO']
+
+# Exercise 1.23
+"""
+Sort the list
+"""
+symlist.sort()
+# print(symlist) # ['AA', 'AAPL', 'AIG', 'GOOG', 'HPQ', 'RHT', 'YHOO']
+
+"""
+Sort in reverse
+"""
+symlist.sort(reverse=True)
+print(symlist)  # ['YHOO', 'RHT', 'HPQ', 'GOOG', 'AIG', 'AAPL', 'AA']
