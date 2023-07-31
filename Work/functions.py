@@ -26,10 +26,20 @@ def portfolio_cost(filename):
         next(file)
         for line in file:
             row = line.split(",")
-            total_cost += float(row[1]) * float(row[2])
+            try:
+                total_cost += float(row[1]) * float(row[2])
+            except ValueError:
+                print("Couldn't parse data, invalid format.")
 
     return total_cost
 
 
 cost = portfolio_cost("Work/Data/portfolio.csv")
-print(f"Total cost: {cost}")
+# print(f"Total cost: {cost}")
+
+# Exercise 1.31
+
+"""
+Catch the exception
+"""
+portfolio_cost("Work/Data/missing.csv")
