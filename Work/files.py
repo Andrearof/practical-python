@@ -32,10 +32,22 @@ Manually skip some lines
 Split read lines
 """
 
-f = open("Work/Data/portfolio.csv", "rt")
-headers = next(f)
-print(headers.split(","))
-for line in f:
-    row = line.split(",")
-    print(row)
-f.close()
+# f = open("Work/Data/portfolio.csv", "rt")
+# headers = next(f)
+# print(headers.split(","))
+# for line in f:
+#     row = line.split(",")
+#     print(row)
+# f.close()
+
+# Exercise 1.28
+
+"""
+Read a Gzip file
+"""
+
+import gzip
+
+with gzip.open("Work/Data/portfolio.csv.gz", "rt") as file:
+    for line in file:
+        print(line, end="")
