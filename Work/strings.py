@@ -16,6 +16,19 @@ symbols = symbols + ",GOOG"
 """
 Experiment with the in operator to check for substrings.
 """
-print("IBM" in symbols)
-print("AA" in symbols)  # True because 'AA' is present in symbols inside 'AAPL'
-print("CAT" in symbols)
+# print("IBM" in symbols)
+# print("AA" in symbols)  # True because 'AA' is present in symbols inside 'AAPL'
+# print("CAT" in symbols)
+
+# Exercise 1.16
+
+"""
+Try experimenting with some of the string methods.
+"""
+
+print(symbols.lower())
+print(symbols.find("MSFT"))
+print(symbols[13:17])
+print(symbols.replace("SCO", "DOA"))
+name = "    IBM     \n"
+print(name.strip())
