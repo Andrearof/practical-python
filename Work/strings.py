@@ -9,4 +9,13 @@ symbols = "AAPL,IBM,MSFT,YHOO,SCO"
 
 symbols = symbols + ",GOOG"
 
-print(symbols)
+# print(symbols)
+
+# Exercise 1.15
+
+"""
+Experiment with the in operator to check for substrings.
+"""
+print("IBM" in symbols)
+print("AA" in symbols)  # True because 'AA' is present in symbols inside 'AAPL'
+print("CAT" in symbols)
