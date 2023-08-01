@@ -41,7 +41,6 @@ def read_prices(filename):
 
     with open(filename, "rt") as file:
         rows = csv.reader(file)
-        headers = next(rows)
         for row in rows:
             if row:
                 prices[row[0]] = float(row[1])
@@ -59,8 +58,32 @@ Tie all of this work together by adding a few additional statements to your repo
 
 current_portfolio_value = 0.0
 for holding in portfolio:
-    current_portfolio_value += prices.get(holding["name"], 0.0) * holding["shares"]
+    current_portfolio_value += prices.get(holding["name"]) * holding["shares"]
 
-print(f"Total cost of portfolio: {total_cost}")
-print(f"Current value of portfolio: {current_portfolio_value}")
-print(f"Total gain/loss: {current_portfolio_value - total_cost}")
+# print(f"Total cost of portfolio: {total_cost}")
+# print(f"Current value of portfolio: {current_portfolio_value}")
+# print(f"Total gain/loss: {current_portfolio_value - total_cost}")
+
+# Exercise 2.9: Collecting Data
+
+"""
+Write a function make_report() that takes a list of stocks and dictionary of prices as input and returns a list of tuples containing the rows of the above table
+"""
+
+
+def make_report(portfolio, prices):
+    report = []
+    for holding in portfolio:
+        r = (
+            holding["name"],
+            holding["shares"],
+            prices[holding["name"]],
+            prices[holding["name"]] - holding["price"],
+        )
+        report.append(r)
+    return report
+
+
+report = make_report(portfolio, prices)
+for r in report:
+    print(r)
