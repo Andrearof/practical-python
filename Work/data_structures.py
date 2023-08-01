@@ -23,4 +23,21 @@ Create a dictionary instead and calculate the cost.
 """
 
 d = {"name": row[0], "shares": int(row[1]), "price": float(row[2])}
-print(f"Total cost: {d['shares'] * d['price']}")
+# print(f"Total cost: {d['shares'] * d['price']}")
+
+# Exercise 2.3: Some additional dictionary operations
+
+# print(list(d))
+
+# for key in d:
+#     print(key, " = ", d[key])
+
+# keys = d.keys()
+# print(keys)
+# del d["name"]
+# print(keys)
+
+items = d.items()
+
+d2 = dict(items)
+print(d2)
