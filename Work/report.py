@@ -25,7 +25,7 @@ def read_portfolio(filename):
     return portfolio, total_cost
 
 
-# portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
 # pprint(portfolio)
 # print(f"Total cost: {total_cost}")
 
@@ -44,9 +44,23 @@ def read_prices(filename):
         headers = next(rows)
         for row in rows:
             if row:
-                prices[row[0]] = row[1]
+                prices[row[0]] = float(row[1])
     return prices
 
 
 prices = read_prices("Work/Data/prices.csv")
-pprint(prices)
+# pprint(prices)
+
+# Exercise 2.7: Finding out if you can retire
+
+"""
+Tie all of this work together by adding a few additional statements to your report.py program that computes gain/loss. These statements should take the list of stocks in Exercise 2.5 and the dictionary of prices in Exercise 2.6 and compute the current value of the portfolio along with the gain/loss.
+"""
+
+current_portfolio_value = 0.0
+for holding in portfolio:
+    current_portfolio_value += prices.get(holding["name"], 0.0) * holding["shares"]
+
+print(f"Total cost of portfolio: {total_cost}")
+print(f"Current value of portfolio: {current_portfolio_value}")
+print(f"Total gain/loss: {current_portfolio_value - total_cost}")
