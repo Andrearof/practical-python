@@ -106,7 +106,18 @@ Add header and separators
 headers = ("Name", "Shares", "Price", "Change")
 
 name, shares, price, change = headers
+# print(f"{name:>10s} {shares:>10s} {price:>10s} {change:>10s}")
+# print(f"{'':-<10s} {'':->10s} {'':->10s} {'':->10s}")
+# for name, shares, price, change in report:
+#     print(f"{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}")
+
+# Exercise 2.11: Adding some headers
+"""
+How would you modify your code so that the price includes the currency symbol ($) ?
+"""
+
 print(f"{name:>10s} {shares:>10s} {price:>10s} {change:>10s}")
 print(f"{'':-<10s} {'':->10s} {'':->10s} {'':->10s}")
 for name, shares, price, change in report:
-    print(f"{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}")
+    price = str(round(price, 2))
+    print(f"{name:>10s} {shares:>10d} {'$' + price:>10s} {change:>10.2f}")
