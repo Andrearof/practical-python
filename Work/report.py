@@ -1,12 +1,13 @@
 # report.py
 #
-# Exercise 2.4 : A list of tuples
+# Exercise 2.5: List of Dictionaries
 
 """
-Define a function read_portfolio(filename) that opens a given portfolio file and reads it into a list of tuples
+Define a function read_portfolio(filename) that opens a given portfolio file and reads it into a dictionary
 """
 
 import csv
+from pprint import pprint
 
 
 def read_portfolio(filename):
@@ -18,12 +19,12 @@ def read_portfolio(filename):
         rows = csv.reader(f)
         headers = next(rows)
         for row in rows:
-            holding = row[0], int(row[1]), float(row[2])
+            holding = {"name": row[0], "shares": int(row[1]), "price": float(row[2])}
             portfolio.append(holding)
-            total_cost += holding[1] * holding[2]
+            total_cost += holding["shares"] * holding["price"]
     return portfolio, total_cost
 
 
 portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
-print(f"Portfolio: {portfolio}")
+pprint(portfolio)
 print(f"Total cost: {total_cost}")
