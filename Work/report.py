@@ -85,5 +85,14 @@ def make_report(portfolio, prices):
 
 
 report = make_report(portfolio, prices)
-for r in report:
-    print(r)
+# for r in report:
+#     print(r)
+
+# Exercise 2.10: Printing a formatted table
+
+"""
+Redo the for-loop in Exercise 2.9, but change the print statement to format the tuples
+"""
+
+for name, shares, price, change in report:
+    print(f"{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}")
