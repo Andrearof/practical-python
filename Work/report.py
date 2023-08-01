@@ -25,6 +25,28 @@ def read_portfolio(filename):
     return portfolio, total_cost
 
 
-portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
-pprint(portfolio)
-print(f"Total cost: {total_cost}")
+# portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+# pprint(portfolio)
+# print(f"Total cost: {total_cost}")
+
+# Exercise 2.6: Dictionaries as a container
+
+"""
+Write a function read_prices(filename) that reads a set of prices into a dictionary where the keys of the dictionary are the stock names and the values in the dictionary are the stock prices.
+"""
+
+
+def read_prices(filename):
+    prices = {}
+
+    with open(filename, "rt") as file:
+        rows = csv.reader(file)
+        headers = next(rows)
+        for row in rows:
+            if row:
+                prices[row[0]] = row[1]
+    return prices
+
+
+prices = read_prices("Work/Data/prices.csv")
+pprint(prices)
