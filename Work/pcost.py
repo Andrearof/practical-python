@@ -28,17 +28,24 @@ Recall that the file Data/missing.csv contains data for a stock portfolio, but h
 Using enumerate(), modify your pcost.py program so that it prints a line number with the warning message when it encounters bad input
 """
 
+# Exercise 2.16: Using the zip() function
+
+import csv
+
 
 def portfolio_cost(filename):
     total_cost = 0
     with open(filename, "rt") as file:
-        next(file)
-        for number, line in enumerate(file, start=1):
-            row = line.split(",")
+        rows = csv.reader(file)
+        headers = next(rows)
+        for number, line in enumerate(rows, start=1):
+            record = dict(zip(headers, line))
             try:
-                total_cost += float(row[1]) * float(row[2])
+                nshares = int(record["shares"])
+                price = float(record["price"])
+                total_cost += nshares * price
             except ValueError:
-                print(f"Row {number}: Bad row: {row}")
+                print(f"Row {number}: Bad row: {line}")
 
     return total_cost
 
@@ -46,5 +53,8 @@ def portfolio_cost(filename):
 # cost = portfolio_cost("Work/Data/portfolio.csv")
 # print(f"Total cost: {cost}")
 
-cost = portfolio_cost("Work/Data/missing.csv")
-print(cost)
+# cost = portfolio_cost("Work/Data/missing.csv")
+# print(cost)
+
+cost = portfolio_cost("Work/Data/portfoliodate.csv")
+print(f"Total cost: {cost}")
