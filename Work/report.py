@@ -180,4 +180,30 @@ more100 = [s for s in portfolio3 if s["shares"] > 100]
 msftibm = [s for s in portfolio3 if s["name"] in {"MSFT", "IBM"}]
 # print(msftibm)
 cost10k = [s for s in portfolio3 if s["shares"] * s["price"] > 10000]
-print(cost10k)
+# print(cost10k)
+
+# Exercise 2.22: Data Extraction
+
+"""
+Show how you could build a list of tuples (name, shares) where name and shares are taken from portfolio
+"""
+
+name_shares = [(s["name"], s["shares"]) for s in portfolio3]
+# print(name_shares)
+
+"""
+Determine the set of unique stock names that appear in portfolio
+"""
+
+# Set comprehension
+names = {s["name"] for s in portfolio3}
+# print(names)
+
+"""
+Make a dictionary that maps the name of a stock to the total number of shares held
+"""
+
+holdings3 = {name: 0 for name in names}
+for s in portfolio3:
+    holdings3[s["name"]] += s["shares"]
+print(holdings3)
