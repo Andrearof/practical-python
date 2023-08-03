@@ -48,7 +48,7 @@ def read_prices(filename):
     return prices
 
 
-prices = read_prices("Work/Data/prices.csv")
+# prices = read_prices("Work/Data/prices.csv")
 # pprint(prices)
 
 # Exercise 2.7: Finding out if you can retire
@@ -149,6 +149,20 @@ combined = holdings + holdings2
 
 nums = [1, 2, 3, 4]
 squares = [x * x for x in nums]
-print(squares)
+# print(squares)
 twice = [2 * x for x in nums if x > 2]
-print(twice)
+# print(twice)
+
+# Exercise 2.20: Sequence Reductions
+
+"""
+Compute the total cost of the portfolio using a single Python statement.
+After you have done that, show how you can compute the current value of the portfolio using a single statement.
+"""
+
+portfolio3, _ = read_portfolio("Work/Data/portfolio.csv")
+cost = sum([s["shares"] * s["price"] for s in portfolio3])
+# print(cost)
+prices = read_prices("Work/Data/prices.csv")
+value = sum([s["shares"] * prices[s["name"]] for s in portfolio3])
+print(value)
