@@ -165,4 +165,19 @@ cost = sum([s["shares"] * s["price"] for s in portfolio3])
 # print(cost)
 prices = read_prices("Work/Data/prices.csv")
 value = sum([s["shares"] * prices[s["name"]] for s in portfolio3])
-print(value)
+# print(value)
+
+# Exercise 2.21: Data Queries
+
+"""
+Try the following examples of various data queries:
+First, a list of all portfolio holdings with more than 100 shares.
+All portfolio holdings for MSFT and IBM stocks.
+A list of all portfolio holdings that cost more than $10000.
+"""
+more100 = [s for s in portfolio3 if s["shares"] > 100]
+# print(more100)
+msftibm = [s for s in portfolio3 if s["name"] in {"MSFT", "IBM"}]
+# print(msftibm)
+cost10k = [s for s in portfolio3 if s["shares"] * s["price"] > 10000]
+print(cost10k)
