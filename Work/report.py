@@ -8,6 +8,7 @@ Define a function read_portfolio(filename) that opens a given portfolio file and
 
 import csv
 from pprint import pprint
+from collections import Counter
 
 
 def read_portfolio(filename):
@@ -25,7 +26,7 @@ def read_portfolio(filename):
     return portfolio, total_cost
 
 
-portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+# portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
 # pprint(portfolio)
 # print(f"Total cost: {total_cost}")
 
@@ -56,9 +57,9 @@ prices = read_prices("Work/Data/prices.csv")
 Tie all of this work together by adding a few additional statements to your report.py program that computes gain/loss. These statements should take the list of stocks in Exercise 2.5 and the dictionary of prices in Exercise 2.6 and compute the current value of the portfolio along with the gain/loss.
 """
 
-current_portfolio_value = 0.0
-for holding in portfolio:
-    current_portfolio_value += prices.get(holding["name"]) * holding["shares"]
+# current_portfolio_value = 0.0
+# for holding in portfolio:
+#     current_portfolio_value += prices.get(holding["name"]) * holding["shares"]
 
 # print(f"Total cost of portfolio: {total_cost}")
 # print(f"Current value of portfolio: {current_portfolio_value}")
@@ -84,7 +85,7 @@ def make_report(portfolio, prices):
     return report
 
 
-report = make_report(portfolio, prices)
+# report = make_report(portfolio, prices)
 # for r in report:
 #     print(r)
 
@@ -116,8 +117,30 @@ name, shares, price, change = headers
 How would you modify your code so that the price includes the currency symbol ($) ?
 """
 
-print(f"{name:>10s} {shares:>10s} {price:>10s} {change:>10s}")
-print(f"{'':-<10s} {'':->10s} {'':->10s} {'':->10s}")
-for name, shares, price, change in report:
-    price = str(round(price, 2))
-    print(f"{name:>10s} {shares:>10d} {'$' + price:>10s} {change:>10.2f}")
+# print(f"{name:>10s} {shares:>10s} {price:>10s} {change:>10s}")
+# print(f"{'':-<10s} {'':->10s} {'':->10s} {'':->10s}")
+# for name, shares, price, change in report:
+#     price = str(round(price, 2))
+#     print(f"{name:>10s} {shares:>10d} {'$' + price:>10s} {change:>10.2f}")
+
+
+# Exercise 2.18: Tabulating with Counters
+
+"""
+Use a Counter to tabulate the total number of shares of each stock
+"""
+
+portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+holdings = Counter()
+for s in portfolio:
+    holdings[s["name"]] += s["shares"]
+# print(holdings.most_common(3))
+
+portfolio2, total_cost2 = read_portfolio("Work/Data/portfolio2.csv")
+holdings2 = Counter()
+for s in portfolio2:
+    holdings2[s["name"]] += s["shares"]
+# print(holdings2)
+
+combined = holdings + holdings2
+print(combined)
