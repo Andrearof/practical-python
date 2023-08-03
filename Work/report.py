@@ -206,4 +206,17 @@ Make a dictionary that maps the name of a stock to the total number of shares he
 holdings3 = {name: 0 for name in names}
 for s in portfolio3:
     holdings3[s["name"]] += s["shares"]
-print(holdings3)
+# print(holdings3)
+
+# Exercise 2.23: Extracting Data From CSV Files
+
+f = open("Work/Data/portfoliodate.csv")
+rows = csv.reader(f)
+headers = next(rows)
+select = ["name", "shares", "price"]
+indices = [headers.index(colname) for colname in select]
+row = next(rows)
+portfolio4 = [
+    {colname: row[index] for colname, index in zip(select, indices)} for row in rows
+]
+print(portfolio4)
