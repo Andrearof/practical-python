@@ -143,4 +143,12 @@ for s in portfolio2:
 # print(holdings2)
 
 combined = holdings + holdings2
-print(combined)
+# print(combined)
+
+# Exercise 2.19: List comprehensions
+
+nums = [1, 2, 3, 4]
+squares = [x * x for x in nums]
+print(squares)
+twice = [2 * x for x in nums if x > 2]
+print(twice)
