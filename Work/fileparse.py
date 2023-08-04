@@ -16,13 +16,17 @@ Modify the parse_csv() function so that it optionally allows type-conversions to
 
 # Exercise 3.7: Picking a different column delimiter
 
+# Exercise 3.8: Raising exceptions
+
 import csv
 
 
-def parse_csv(filename, select=None, types=None, has_headers=False, delimiter=","):
+def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=","):
     """
     Parse a CSV file into a list of records
     """
+    if select and not has_headers:
+        raise RuntimeError("select argument requires column headers")
     with open(filename) as file:
         rows = csv.reader(file, delimiter=delimiter)
 
@@ -64,5 +68,7 @@ def parse_csv(filename, select=None, types=None, has_headers=False, delimiter=",
 # portfolio = parse_csv("Work/Data/prices.csv", types=[str, float], has_headers=False)
 # print(portfolio)
 
-portfolio = parse_csv("Work/Data/portfolio.dat", types=[str, int, float], delimiter=" ")
-print(portfolio)
+# portfolio = parse_csv("Work/Data/portfolio.dat", types=[str, int, float], delimiter=" ")
+# print(portfolio)
+
+parse_csv("Data/prices.csv", select=["name", "price"], has_headers=False)
