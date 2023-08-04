@@ -14,15 +14,17 @@ Modify the parse_csv() function so that it optionally allows type-conversions to
 
 # Exercise 3.6: Working without Headers
 
+# Exercise 3.7: Picking a different column delimiter
+
 import csv
 
 
-def parse_csv(filename, select=None, types=None, has_headers=False):
+def parse_csv(filename, select=None, types=None, has_headers=False, delimiter=","):
     """
     Parse a CSV file into a list of records
     """
     with open(filename) as file:
-        rows = csv.reader(file)
+        rows = csv.reader(file, delimiter=delimiter)
 
         # Headers
         headers = next(rows)
@@ -59,5 +61,8 @@ def parse_csv(filename, select=None, types=None, has_headers=False):
 # )
 # print(portfolio)
 
-portfolio = parse_csv("Work/Data/prices.csv", types=[str, float], has_headers=False)
+# portfolio = parse_csv("Work/Data/prices.csv", types=[str, float], has_headers=False)
+# print(portfolio)
+
+portfolio = parse_csv("Work/Data/portfolio.dat", types=[str, int, float], delimiter=" ")
 print(portfolio)
