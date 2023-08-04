@@ -104,9 +104,9 @@ Redo the for-loop in Exercise 2.9, but change the print statement to format the 
 Add header and separators
 """
 
-headers = ("Name", "Shares", "Price", "Change")
+# headers = ("Name", "Shares", "Price", "Change")
 
-name, shares, price, change = headers
+# name, shares, price, change = headers
 # print(f"{name:>10s} {shares:>10s} {price:>10s} {change:>10s}")
 # print(f"{'':-<10s} {'':->10s} {'':->10s} {'':->10s}")
 # for name, shares, price, change in report:
@@ -130,19 +130,19 @@ How would you modify your code so that the price includes the currency symbol ($
 Use a Counter to tabulate the total number of shares of each stock
 """
 
-portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
-holdings = Counter()
-for s in portfolio:
-    holdings[s["name"]] += s["shares"]
-# print(holdings.most_common(3))
+# portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+# holdings = Counter()
+# for s in portfolio:
+#     holdings[s["name"]] += s["shares"]
+# # print(holdings.most_common(3))
 
-portfolio2, total_cost2 = read_portfolio("Work/Data/portfolio2.csv")
-holdings2 = Counter()
-for s in portfolio2:
-    holdings2[s["name"]] += s["shares"]
-# print(holdings2)
+# portfolio2, total_cost2 = read_portfolio("Work/Data/portfolio2.csv")
+# holdings2 = Counter()
+# for s in portfolio2:
+#     holdings2[s["name"]] += s["shares"]
+# # print(holdings2)
 
-combined = holdings + holdings2
+# combined = holdings + holdings2
 # print(combined)
 
 # Exercise 2.19: List comprehensions
@@ -160,12 +160,12 @@ Compute the total cost of the portfolio using a single Python statement.
 After you have done that, show how you can compute the current value of the portfolio using a single statement.
 """
 
-portfolio3, _ = read_portfolio("Work/Data/portfolio.csv")
-cost = sum([s["shares"] * s["price"] for s in portfolio3])
-# print(cost)
-prices = read_prices("Work/Data/prices.csv")
-value = sum([s["shares"] * prices[s["name"]] for s in portfolio3])
-# print(value)
+# portfolio3, _ = read_portfolio("Work/Data/portfolio.csv")
+# cost = sum([s["shares"] * s["price"] for s in portfolio3])
+# # print(cost)
+# prices = read_prices("Work/Data/prices.csv")
+# value = sum([s["shares"] * prices[s["name"]] for s in portfolio3])
+# # print(value)
 
 # Exercise 2.21: Data Queries
 
@@ -175,12 +175,12 @@ First, a list of all portfolio holdings with more than 100 shares.
 All portfolio holdings for MSFT and IBM stocks.
 A list of all portfolio holdings that cost more than $10000.
 """
-more100 = [s for s in portfolio3 if s["shares"] > 100]
-# print(more100)
-msftibm = [s for s in portfolio3 if s["name"] in {"MSFT", "IBM"}]
-# print(msftibm)
-cost10k = [s for s in portfolio3 if s["shares"] * s["price"] > 10000]
-# print(cost10k)
+# more100 = [s for s in portfolio3 if s["shares"] > 100]
+# # print(more100)
+# msftibm = [s for s in portfolio3 if s["name"] in {"MSFT", "IBM"}]
+# # print(msftibm)
+# cost10k = [s for s in portfolio3 if s["shares"] * s["price"] > 10000]
+# # print(cost10k)
 
 # Exercise 2.22: Data Extraction
 
@@ -188,35 +188,59 @@ cost10k = [s for s in portfolio3 if s["shares"] * s["price"] > 10000]
 Show how you could build a list of tuples (name, shares) where name and shares are taken from portfolio
 """
 
-name_shares = [(s["name"], s["shares"]) for s in portfolio3]
-# print(name_shares)
+# name_shares = [(s["name"], s["shares"]) for s in portfolio3]
+# # print(name_shares)
 
 """
 Determine the set of unique stock names that appear in portfolio
 """
 
 # Set comprehension
-names = {s["name"] for s in portfolio3}
-# print(names)
+# names = {s["name"] for s in portfolio3}
+# # print(names)
 
 """
 Make a dictionary that maps the name of a stock to the total number of shares held
 """
 
-holdings3 = {name: 0 for name in names}
-for s in portfolio3:
-    holdings3[s["name"]] += s["shares"]
-# print(holdings3)
+# holdings3 = {name: 0 for name in names}
+# for s in portfolio3:
+#     holdings3[s["name"]] += s["shares"]
+# # print(holdings3)
 
 # Exercise 2.23: Extracting Data From CSV Files
 
-f = open("Work/Data/portfoliodate.csv")
-rows = csv.reader(f)
-headers = next(rows)
-select = ["name", "shares", "price"]
-indices = [headers.index(colname) for colname in select]
-row = next(rows)
-portfolio4 = [
-    {colname: row[index] for colname, index in zip(select, indices)} for row in rows
-]
-print(portfolio4)
+
+def extract_csv():
+    f = open("Work/Data/portfoliodate.csv")
+    rows = csv.reader(f)
+    headers = next(rows)
+    select = ["name", "shares", "price"]
+    indices = [headers.index(colname) for colname in select]
+    row = next(rows)
+    portfolio = [
+        {colname: row[index] for colname, index in zip(select, indices)} for row in rows
+    ]
+    return portfolio
+
+
+# Exercise 3.1: Structuring a program as a collection of functions
+
+"""
+Create a function print_report(report) that prints out the report.
+"""
+
+
+def print_report(report):
+    headers = ("Name", "Shares", "Price", "Change")
+    name, shares, price, change = headers
+    print(f"{name:>10s} {shares:>10s} {price:>10s} {change:>10s}")
+    print(f"{'':-<10s} {'':->10s} {'':->10s} {'':->10s}")
+    for name, shares, price, change in report:
+        price = str(round(price, 2))
+        print(f"{name:>10s} {shares:>10d} {'$' + price:>10s} {change:>10.2f}")
+
+
+portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+prices = read_prices("Work/Data/prices.csv")
+print_report(make_report(portfolio, prices))
