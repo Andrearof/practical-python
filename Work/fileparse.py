@@ -18,6 +18,8 @@ Modify the parse_csv() function so that it optionally allows type-conversions to
 
 # Exercise 3.8: Raising exceptions
 
+# Exercise 3.9: Catching exceptions
+
 import csv
 
 
@@ -39,13 +41,17 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=","
             indices = []
 
         records = []
-        for row in rows:
+        for index, row in enumerate(rows, start=1):
             if not row:  # skip with no data
                 continue
             if indices:
                 row = [row[index] for index in indices]
             if types:
-                row = [func(val) for func, val in zip(types, row)]
+                try:
+                    row = [func(val) for func, val in zip(types, row)]
+                except ValueError as error:
+                    print(f"Row {index}: Couldn't convert {row}")
+                    print(f"Row {index}: {error}")
 
             if has_headers:
                 record = dict(zip(headers, row))
@@ -71,4 +77,7 @@ def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=","
 # portfolio = parse_csv("Work/Data/portfolio.dat", types=[str, int, float], delimiter=" ")
 # print(portfolio)
 
-parse_csv("Data/prices.csv", select=["name", "price"], has_headers=False)
+# parse_csv("Data/prices.csv", select=["name", "price"], has_headers=False)
+
+portfolio = parse_csv("Work/Data/missing.csv", types=[str, int, float])
+print(portfolio)
