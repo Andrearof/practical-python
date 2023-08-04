@@ -56,5 +56,18 @@ def portfolio_cost(filename):
 # cost = portfolio_cost("Work/Data/missing.csv")
 # print(cost)
 
-cost = portfolio_cost("Work/Data/portfoliodate.csv")
-print(f"Total cost: {cost}")
+# cost = portfolio_cost("Work/Data/portfoliodate.csv")
+# print(f"Total cost: {cost}")
+
+# Exercise 3.15: main() functions
+
+
+def main(portfolio_filename):
+    total_cost = portfolio_cost(portfolio_filename)
+    print(f"Total cost: {total_cost}")
+
+
+if __name__ == "__main__":
+    import sys
+
+    main(sys.argv[1])

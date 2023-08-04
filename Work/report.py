@@ -9,6 +9,7 @@ Define a function read_portfolio(filename) that opens a given portfolio file and
 import csv
 from pprint import pprint
 from collections import Counter
+import sys
 
 
 def read_portfolio(filename):
@@ -262,8 +263,20 @@ def portfolio_report(portfolio_filename, report_filename):
 
 # portfolio_report("Work/Data/portfolio2.csv", "Work/Data/prices.csv")
 
-files = ["Work/Data/portfolio.csv", "Work/Data/portfolio2.csv"]
-for name in files:
-    print(f"{name:-^43s}")
-    portfolio_report(name, "Work/Data/prices.csv")
-    print()
+# files = ["Work/Data/portfolio.csv", "Work/Data/portfolio2.csv"]
+# for name in files:
+#     print(f"{name:-^43s}")
+#     portfolio_report(name, "Work/Data/prices.csv")
+#     print()
+
+# Exercise 3.15: main() functions
+
+# Exercise 3.16: Making Scripts
+
+
+def main(portfolio_filename, prices_filename):
+    portfolio_report(portfolio_filename, prices_filename)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1], sys.argv[2])
