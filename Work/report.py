@@ -241,6 +241,29 @@ def print_report(report):
         print(f"{name:>10s} {shares:>10d} {'$' + price:>10s} {change:>10.2f}")
 
 
-portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
-prices = read_prices("Work/Data/prices.csv")
-print_report(make_report(portfolio, prices))
+# portfolio, total_cost = read_portfolio("Work/Data/portfolio.csv")
+# prices = read_prices("Work/Data/prices.csv")
+# print_report(make_report(portfolio, prices))
+
+# Exercise 3.2: Creating a top-level function for program execution
+
+"""
+Take the last part of your program and package it into a single function portfolio_report(portfolio_filename, prices_filename)
+"""
+
+
+def portfolio_report(portfolio_filename, report_filename):
+    portfolio, total_cost = read_portfolio(portfolio_filename)
+    prices = read_prices(report_filename)
+    print_report(make_report(portfolio, prices))
+
+
+# portfolio_report("Work/Data/portfolio.csv", "Work/Data/prices.csv")
+
+# portfolio_report("Work/Data/portfolio2.csv", "Work/Data/prices.csv")
+
+files = ["Work/Data/portfolio.csv", "Work/Data/portfolio2.csv"]
+for name in files:
+    print(f"{name:-^43s}")
+    portfolio_report(name, "Work/Data/prices.csv")
+    print()
