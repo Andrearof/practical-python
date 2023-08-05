@@ -1,6 +1,6 @@
 # report.py
 
-# Exercise 4.4: Using your class
+# Exercise 4.7: Polymorphism in Action
 
 """
 Modify the read_portfolio() function in the report.py program so that it reads a portfolio into a list of Stock instances
@@ -13,6 +13,7 @@ from tableformat import (
     TextTableFormatter,
     CSVTableFormatter,
     HTMLTableFormatter,
+    create_formatter,
 )
 
 
@@ -63,7 +64,7 @@ def print_report(reportdata, formatter: TableFormatter):
         formatter.row(rowdata)
 
 
-def portfolio_report(portfoliofile, pricefile):
+def portfolio_report(portfoliofile, pricefile, format="txt"):
     """
     Make a stock report given portfolio and price data files.
     """
@@ -75,7 +76,7 @@ def portfolio_report(portfoliofile, pricefile):
     report = make_report_data(portfolio, prices)
 
     # Print it out
-    formatter = HTMLTableFormatter()
+    formatter = create_formatter(format=format)
     print_report(report, formatter)
 
 

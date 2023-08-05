@@ -1,4 +1,18 @@
-# Exercise 4.6: Using Inheritance to Produce Different Output
+# Exercise 4.7: Polymorphism in Action
+
+
+def create_formatter(format: str) -> "TableFormatter":
+    formatter: TableFormatter
+    match format:
+        case "txt":
+            formatter = TextTableFormatter()
+        case "csv":
+            formatter = CSVTableFormatter()
+        case "html":
+            formatter = HTMLTableFormatter()
+        case other:
+            raise RuntimeError(f"Unknown format {format}")
+    return formatter
 
 
 class TableFormatter:
