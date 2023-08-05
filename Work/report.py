@@ -8,7 +8,12 @@ Modify the read_portfolio() function in the report.py program so that it reads a
 
 import fileparse
 from stock import Stock
-from tableformat import TableFormatter
+from tableformat import (
+    TableFormatter,
+    TextTableFormatter,
+    CSVTableFormatter,
+    HTMLTableFormatter,
+)
 
 
 def read_portfolio(filename):
@@ -70,7 +75,7 @@ def portfolio_report(portfoliofile, pricefile):
     report = make_report_data(portfolio, prices)
 
     # Print it out
-    formatter = TableFormatter()
+    formatter = HTMLTableFormatter()
     print_report(report, formatter)
 
 
