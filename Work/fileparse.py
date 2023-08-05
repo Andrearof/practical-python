@@ -1,83 +1,47 @@
 # fileparse.py
-#
-# Exercise 3.3
-
-# Exercise 3.4: Building a Column Selector
-"""
- Modify the parse_csv() function so that it optionally allows user-specified columns to be picked out
-"""
-
-# Exercise 3.5: Performing Type Conversion
-"""
-Modify the parse_csv() function so that it optionally allows type-conversions to be applied to the returned data
-"""
-
-# Exercise 3.6: Working without Headers
-
-# Exercise 3.7: Picking a different column delimiter
-
-# Exercise 3.8: Raising exceptions
-
-# Exercise 3.9: Catching exceptions
-
 import csv
 
-
-def parse_csv(filename, select=None, types=None, has_headers=True, delimiter=","):
-    """
-    Parse a CSV file into a list of records
-    """
+def parse_csv(lines, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
+    '''
+    Parse a CSV file into a list of records with type conversion.
+    '''
     if select and not has_headers:
-        raise RuntimeError("select argument requires column headers")
-    with open(filename) as file:
-        rows = csv.reader(file, delimiter=delimiter)
+        raise RuntimeError('select requires column headers')
 
-        # Headers
-        headers = next(rows)
+    rows = csv.reader(lines, delimiter=delimiter)
+
+    # Read the file headers (if any)
+    headers = next(rows) if has_headers else []
+
+    # If specific columns have been selected, make indices for filtering and set output columns
+    if select:
+        indices = [ headers.index(colname) for colname in select ]
+        headers = select
+
+    records = []
+    for rowno, row in enumerate(rows, 1):
+        if not row:     # Skip rows with no data
+            continue
+
+        # If specific column indices are selected, pick them out
         if select:
-            indices = [headers.index(colname) for colname in select]
-            headers = select
-        else:
-            indices = []
+            row = [ row[index] for index in indices]
 
-        records = []
-        for index, row in enumerate(rows, start=1):
-            if not row:  # skip with no data
+        # Apply type conversion to the row
+        if types:
+            try:
+                row = [func(val) for func, val in zip(types, row)]
+            except ValueError as e:
+                if not silence_errors:
+                    print(f"Row {rowno}: Couldn't convert {row}")
+                    print(f"Row {rowno}: Reason {e}")
                 continue
-            if indices:
-                row = [row[index] for index in indices]
-            if types:
-                try:
-                    row = [func(val) for func, val in zip(types, row)]
-                except ValueError as error:
-                    print(f"Row {index}: Couldn't convert {row}")
-                    print(f"Row {index}: {error}")
 
-            if has_headers:
-                record = dict(zip(headers, row))
-                records.append(record)
-            else:
-                record = tuple(row)
-                records.append(record)
+        # Make a dictionary or a tuple
+        if headers:
+            record = dict(zip(headers, row))
+        else:
+            record = tuple(row)
+        records.append(record)
 
     return records
-
-
-# portfolio = parse_csv("Work/Data/portfolio.csv")
-# print(portfolio)
-
-# portfolio = parse_csv(
-#     "Work/Data/portfolio.csv", select=["name", "shares"], types=[str, float]
-# )
-# print(portfolio)
-
-# portfolio = parse_csv("Work/Data/prices.csv", types=[str, float], has_headers=False)
-# print(portfolio)
-
-# portfolio = parse_csv("Work/Data/portfolio.dat", types=[str, int, float], delimiter=" ")
-# print(portfolio)
-
-# parse_csv("Data/prices.csv", select=["name", "price"], has_headers=False)
-
-portfolio = parse_csv("Work/Data/missing.csv", types=[str, int, float])
-print(portfolio)
