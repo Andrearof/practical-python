@@ -1,7 +1,7 @@
-# Exercise 4.1: Objects as Data Structures
+# Exercise 4.2: Adding some Methods
 
 """
-Define a class Stock that represents a single holding of stock. Have the instances of Stock have name, shares, and price attributes.
+ Add a cost() and sell() method to your Stock object.
 """
 
 
@@ -11,12 +11,17 @@ class Stock:
         self.shares = shares
         self.price = price
 
+    def cost(self) -> float:
+        return self.shares * self.price
 
-a = Stock("GOOG", 100, 490.10)
-b = Stock("AAPL", 50, 122.34)
-c = Stock("IBM", 75, 91.75)
-print(b.shares * b.price)
-print(c.shares * c.price)
-stocks = [a, b, c]
-for s in stocks:
-    print(f"{s.name:>10s} {s.shares:>10d} {s.price:>10.2f}")
+    def sell(self, stocks_number: int) -> None:
+        self.shares -= stocks_number
+        return
+
+
+s = Stock("GOOG", 100, 490.10)
+print(s.cost())
+print(s.shares)
+s.sell(25)
+print(s.shares)
+print(s.cost())
