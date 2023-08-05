@@ -1,6 +1,6 @@
 # report.py
 
-# Exercise 4.7: Polymorphism in Action
+# Exercise 4.8: Putting it all together
 
 """
 Modify the read_portfolio() function in the report.py program so that it reads a portfolio into a list of Stock instances
@@ -81,9 +81,9 @@ def portfolio_report(portfoliofile, pricefile, format="txt"):
 
 
 def main(args):
-    if len(args) != 3:
-        raise SystemExit("Usage: %s portfile pricefile" % args[0])
-    portfolio_report(args[1], args[2])
+    if len(args) != 4:
+        raise SystemExit("Usage: %s portfile pricefile format" % args[0])
+    portfolio_report(args[1], args[2], args[3])
 
 
 if __name__ == "__main__":

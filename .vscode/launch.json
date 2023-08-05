@@ -11,7 +11,11 @@
             "program": "Work/report.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["Work/Data/portfolio.csv", "Work/Data/prices.csv"]
+            "args": [
+                "Work/Data/portfolio.csv",
+                "Work/Data/prices.csv",
+                "txt"
+            ]
         },
         {
             "name": "Total Cost",
@@ -20,7 +24,9 @@
             "program": "Work/pcost.py",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "args": ["Work/Data/portfolio.csv"]
+            "args": [
+                "Work/Data/portfolio.csv"
+            ]
         }
     ]
 }
