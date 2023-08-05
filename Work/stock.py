@@ -1,8 +1,11 @@
-# Exercise 4.2: Adding some Methods
+# Exercise 4.3: Creating a list of instances
 
 """
- Add a cost() and sell() method to your Stock object.
+Make a list of Stock instances from a list of dictionaries. 
+Then compute the total cost.
 """
+
+from fileparse import parse_csv
 
 
 class Stock:
@@ -19,9 +22,10 @@ class Stock:
         return
 
 
-s = Stock("GOOG", 100, 490.10)
-print(s.cost())
-print(s.shares)
-s.sell(25)
-print(s.shares)
-print(s.cost())
+with open("Work/Data/portfolio.csv") as lines:
+    port_dicts = parse_csv(
+        lines, select=["name", "shares", "price"], types=[str, int, float]
+    )
+
+portfolio = [Stock(d["name"], d["shares"], d["price"]) for d in port_dicts]
+print(sum([s.cost() for s in portfolio]))
