@@ -1,8 +1,7 @@
-# Exercise 4.3: Creating a list of instances
+# Exercise 4.9: Better output for printing objects
 
 """
-Make a list of Stock instances from a list of dictionaries. 
-Then compute the total cost.
+Modify the Stock object that you defined in stock.py so that the __repr__() method produces more useful output.
 """
 
 from fileparse import parse_csv
@@ -13,6 +12,9 @@ class Stock:
         self.name = name
         self.shares = shares
         self.price = price
+
+    def __repr__(self) -> str:
+        return f"({self.name}, {self.shares}, {self.price})"
 
     def cost(self) -> float:
         return self.shares * self.price
@@ -27,5 +29,5 @@ with open("Work/Data/portfolio.csv") as lines:
         lines, select=["name", "shares", "price"], types=[str, int, float]
     )
 
-portfolio = [Stock(d["name"], d["shares"], d["price"]) for d in port_dicts]
-print(sum([s.cost() for s in portfolio]))
+goog = Stock("GOOG", 100, 490.1)
+print(goog)
