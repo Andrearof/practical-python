@@ -1,4 +1,8 @@
-# Exercise 4.7: Polymorphism in Action
+# Exercise 4.11: Defining a custom exception
+
+
+class FormatError(Exception):
+    pass
 
 
 def create_formatter(format: str) -> "TableFormatter":
@@ -11,7 +15,7 @@ def create_formatter(format: str) -> "TableFormatter":
         case "html":
             formatter = HTMLTableFormatter()
         case other:
-            raise RuntimeError(f"Unknown format {format}")
+            raise FormatError(f"Unknown format {format}")
     return formatter
 
 
