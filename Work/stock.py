@@ -1,8 +1,4 @@
-# Exercise 4.9: Better output for printing objects
-
-"""
-Modify the Stock object that you defined in stock.py so that the __repr__() method produces more useful output.
-"""
+# Exercise 5.6: Simple Properties
 
 from fileparse import parse_csv
 
@@ -16,6 +12,7 @@ class Stock:
     def __repr__(self) -> str:
         return f"({self.name}, {self.shares}, {self.price})"
 
+    @property
     def cost(self) -> float:
         return self.shares * self.price
 
@@ -24,10 +21,5 @@ class Stock:
         return
 
 
-with open("Work/Data/portfolio.csv") as lines:
-    port_dicts = parse_csv(
-        lines, select=["name", "shares", "price"], types=[str, int, float]
-    )
-
 goog = Stock("GOOG", 100, 490.1)
-print(goog)
+print(goog.cost)
