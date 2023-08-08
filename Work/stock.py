@@ -1,9 +1,11 @@
-# Exercise 5.7: Properties and Setters
+# Exercise 5.8: Adding slots
 
 from fileparse import parse_csv
 
 
 class Stock:
+    __slots__ = ("name", "_shares", "price")
+
     def __init__(self, name: str, shares: int, price: float) -> None:
         self.name = name
         self._shares = shares
@@ -32,5 +34,4 @@ class Stock:
 
 
 goog = Stock("GOOG", 100, 490.1)
-goog.shares = "a"
-print(goog.shares)
+print(goog.__dict__)
