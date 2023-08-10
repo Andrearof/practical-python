@@ -4,6 +4,7 @@
     // Per altre informazioni, visitare: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
         {
             "name": "Reports",
             "type": "python",
@@ -26,6 +27,19 @@
             "justMyCode": true,
             "args": [
                 "Work/Data/portfolio.csv"
+            ]
+        },
+        {
+            "name": "Stock Ticker",
+            "type": "python",
+            "request": "launch",
+            "program": "Work/ticker.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "Work/Data/portfolio.csv",
+                "Work/Data/stocklog.csv",
+                "txt"
             ]
         }
     ]
