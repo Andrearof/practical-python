@@ -1,4 +1,4 @@
-# Exercise 6.5: Monitoring a streaming data source
+# Exercise 6.7: Watching your portfolio
 
 import os
 import time
@@ -17,10 +17,14 @@ def follow(filename):
 
 
 if __name__ == "__main__":
+    from report import read_portfolio
+
+    portfolio = read_portfolio("Work/Data/portfolio.csv")
+
     for line in follow("Work/Data/stocklog.csv"):
         fields = line.split(",")
         name = fields[0].strip('"')
         price = float(fields[1])
         change = float(fields[4])
-        if change < 0:
+        if name in portfolio:
             print(f"{name:>10s} {price:>10.2f} {change:>10.2f}")
