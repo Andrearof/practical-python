@@ -1,12 +1,8 @@
-# Exercise 6.4: A Simple Generator
+# Exercise 6.13: Generator Expressions
 
 
-def filematch(filename, substr):
-    with open(filename, "r") as file:
-        for line in file:
-            if substr in line:
-                yield line
-
-
-for line in filematch("Work/Data/portfolio.csv", "IBM"):
-    print(line, end="")
+nums = [1, 2, 3, 4, 5]
+squares = (x * x for x in nums)
+print(squares)
+for n in squares:
+    print(n)
