@@ -1,4 +1,4 @@
-# Exercise 6.2: Supporting Iteration
+# Exercise 6.3: Making a more proper container
 
 
 class Portfolio:
@@ -7,6 +7,15 @@ class Portfolio:
 
     def __iter__(self):
         return self._holdings.__iter__()
+
+    def __len__(self):
+        return len(self._holdings)
+
+    def __getitem__(self, index: int):
+        return self._holdings[index]
+
+    def __contains__(self, name):
+        return any([s.name == name for s in self._holdings])
 
     @property
     def total_cost(self):
