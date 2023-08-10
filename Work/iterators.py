@@ -1,15 +1,12 @@
-# Exercise 6.1: Iteration Illustrated
+# Exercise 6.4: A Simple Generator
 
-a = [1, 9, 4, 25, 16]
 
-f = open("Work/Data/portfolio.csv")
-print(next(f))
-print(next(f))
+def filematch(filename, substr):
+    with open(filename, "r") as file:
+        for line in file:
+            if substr in line:
+                yield line
 
-i = a.__iter__()
-print(i.__next__())
-print(i.__next__())
-print(i.__next__())
-print(i.__next__())
-print(i.__next__())
-print(i.__next__())
+
+for line in filematch("Work/Data/portfolio.csv", "IBM"):
+    print(line, end="")
