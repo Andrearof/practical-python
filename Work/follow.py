@@ -1,4 +1,4 @@
-# Exercise 6.7: Watching your portfolio
+# Exercise 6.8: Setting up a simple pipeline
 
 import os
 import time
@@ -14,6 +14,12 @@ def follow(filename):
             time.sleep(0.1)
             continue
         yield line
+
+
+def filematch(lines, substr):
+    for line in lines:
+        if substr in line:
+            yield line
 
 
 if __name__ == "__main__":
