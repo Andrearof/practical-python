@@ -8,6 +8,7 @@ Modify the read_portfolio() function in the report.py program so that it reads a
 
 import fileparse
 from stock import Stock
+from portfolio import Portfolio
 from tableformat import (
     TableFormatter,
     TextTableFormatter,
@@ -27,7 +28,7 @@ def read_portfolio(filename):
             lines, select=["name", "shares", "price"], types=[str, int, float]
         )
         port_objs = [Stock(d["name"], d["shares"], d["price"]) for d in port_dicts]
-        return port_objs
+        return Portfolio(port_objs)
 
 
 def read_prices(filename):

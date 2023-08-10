@@ -31,7 +31,3 @@ class Stock:
     def sell(self, stocks_number: int) -> None:
         self.shares -= stocks_number
         return
-
-
-goog = Stock("GOOG", 100, 490.1)
-print(goog.__dict__)
