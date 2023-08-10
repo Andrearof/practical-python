@@ -1,8 +1,5 @@
-# Exercise 6.13: Generator Expressions
+# Exercise 6.14: Generator Expressions in Function Arguments
 
 
 nums = [1, 2, 3, 4, 5]
-squares = (x * x for x in nums)
-print(squares)
-for n in squares:
-    print(n)
+print(sum(x * x for x in nums))
