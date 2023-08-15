@@ -1,4 +1,4 @@
-# Exercise 7.5: Sorting on a field
+# Exercise 7.6: Sorting on a field with lambda
 
 from report import read_portfolio
 
@@ -9,6 +9,7 @@ def stock_name(s):
     return s.name
 
 
-portfolio.sort(key=stock_name)
+portfolio.sort(key=lambda s: s.price)
+
 for s in portfolio:
     print(s)
