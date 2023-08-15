@@ -1,6 +1,6 @@
 # report.py
 
-# Exercise 4.8: Putting it all together
+# Exercise 7.3: Creating a list of instances
 
 """
 Modify the read_portfolio() function in the report.py program so that it reads a portfolio into a list of Stock instances
@@ -27,7 +27,7 @@ def read_portfolio(filename):
         port_dicts = fileparse.parse_csv(
             lines, select=["name", "shares", "price"], types=[str, int, float]
         )
-        port_objs = [Stock(d["name"], d["shares"], d["price"]) for d in port_dicts]
+        port_objs = [Stock(**d) for d in port_dicts]
         return Portfolio(port_objs)
 
 
