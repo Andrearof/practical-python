@@ -1,10 +1,12 @@
-# Exercise 5.8: Adding slots
+# Exercise 7.7: Using Closures to Avoid Repetition
 
-from fileparse import parse_csv
+from typedproperty import typedproperty
 
 
 class Stock:
-    __slots__ = ("name", "_shares", "price")
+    name = typedproperty("name", str)
+    shares = typedproperty("shares", int)
+    price = typedproperty("price", float)
 
     def __init__(self, name: str, shares: int, price: float) -> None:
         self.name = name
@@ -13,16 +15,6 @@ class Stock:
 
     def __repr__(self) -> str:
         return f"({self.name}, {self.shares}, {self.price})"
-
-    @property
-    def shares(self) -> int:
-        return self._shares
-
-    @shares.setter
-    def shares(self, value: int) -> None:
-        if not isinstance(value, int):
-            raise TypeError("Expected int")
-        self._shares = value
 
     @property
     def cost(self) -> float:
