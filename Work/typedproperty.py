@@ -1,4 +1,9 @@
-# Exercise 7.7: Using Closures to Avoid Repetition
+# Exercise 7.8: Simplifying Function Calls
+
+# Discouraged by linter, use 'def' instead of assigning lambda functions
+String = lambda name: typedproperty(name, str)
+Integer = lambda name: typedproperty(name, int)
+Float = lambda name: typedproperty(name, float)
 
 
 def typedproperty(name, expected_type):

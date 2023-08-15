@@ -1,12 +1,12 @@
-# Exercise 7.7: Using Closures to Avoid Repetition
+# Exercise 7.8: Simplifying Function Calls
 
-from typedproperty import typedproperty
+from typedproperty import String, Integer, Float
 
 
 class Stock:
-    name = typedproperty("name", str)
-    shares = typedproperty("shares", int)
-    price = typedproperty("price", float)
+    name = String("name")
+    shares = Integer("shares")
+    price = Float("price")
 
     def __init__(self, name: str, shares: int, price: float) -> None:
         self.name = name
