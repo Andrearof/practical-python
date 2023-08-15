@@ -1,8 +1,13 @@
-# Exercise 7.1: A simple example of variable arguments
+# Exercise 7.2: Passing tuple and dicts as arguments
+
+from stock import Stock
 
 
-def avg(x, *more):
-    return float(x + sum(more)) / (1 + len(more))
+data = ("GOOG", 100, 490.1)
 
+s = Stock(*data)
+print(s)
 
-print(avg(1, 2, 3, 4, 5, 6))
+data2 = {"name": "GOOG", "shares": 100, "price": 490.1}
+t = Stock(**data2)
+print(t)
